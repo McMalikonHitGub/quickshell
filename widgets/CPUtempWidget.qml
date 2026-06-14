@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import qs.singletons
 
-Widget {
-    inhalt:         "T(CPU)=300 K"
+TextWidget {
+    inhalt:         hovered ? "T(CPU)=" + CPU.tempC + "°C" :  "T(CPU)=" + CPU.tempK + "°K" 
     inhaltcolor:    Colors.text
 }

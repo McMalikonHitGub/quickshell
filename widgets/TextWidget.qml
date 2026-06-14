@@ -11,17 +11,8 @@ Rectangle {
     function enter() {}
     function exit() {}
     function click() {}
-    
-    default property alias content: contentItem.data
 
-    Item {
-        id: contentItem
-        anchors.centerIn: parent
-    }
-
-    implicitWidth: Math.max(
-        contentItem.childrenRect.width
-    )+ 10
+    implicitWidth: text.implicitWidth + 10
     implicitHeight: Globals.barheight
 
     MouseArea {
@@ -36,7 +27,6 @@ Rectangle {
     }
     Text {
         id: text
-        visible: inhalt !== ""
         anchors.centerIn: parent
         font: Globals.font
         color: inhaltcolor

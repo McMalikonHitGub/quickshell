@@ -2,9 +2,8 @@ import Quickshell
 import QtQuick
 import qs.singletons
 
-Widget {
+ObjectWidget {
     anchors.centerIn:   parent
     Workspaces {anchors.centerIn: parent}
-    width: 150
     inhaltcolor: Colors.text
 }

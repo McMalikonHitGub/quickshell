@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import qs.singletons
 
-Widget {
+TextWidget {
     inhalt:         Time.time
     inhaltcolor:    Colors.text
 }

@@ -9,6 +9,10 @@ Row {
     Clock{id:clo}
     Wlogout{id:wlo}
     property real position: parent.width - bat.width - net.width - clo.width - wlo.width - 20
-    Component.onCompleted: print(bat.childrenRect)
+
+    property int wlogout_pos: position+wlo.x
+    property int network_pos: position+net.x
+    //Component.onCompleted: print(wlo.childrenRect)
+    //Component.onCompleted: print(wlo.x)
 
 }

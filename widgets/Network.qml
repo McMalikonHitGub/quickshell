@@ -1,8 +1,11 @@
 import Quickshell
 import QtQuick
+import Quickshell.Io 
 import qs.singletons
-
-Widget {
-    inhalt:         "WLan"
-    inhaltcolor:    Colors.text
+TextWidget{
+    inhaltcolor: Colors.text
+    inhalt:"wlan"
 }
+
+
+

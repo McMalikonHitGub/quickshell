@@ -2,7 +2,7 @@ import Quickshell
 import QtQuick
 import qs.singletons
 
-Widget {
+TextWidget {
     inhalt:         "CPU %"
     inhaltcolor:    Colors.text
 }
