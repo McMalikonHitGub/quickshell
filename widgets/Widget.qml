@@ -23,7 +23,9 @@ Rectangle {
         contentItem.childrenRect.width
     )+ 10
     implicitHeight: Globals.barheight
-
+    Behavior on implicitWidth {
+        NumberAnimation {duration:100}
+    }
     MouseArea {
         id:                 mouse
         anchors.fill:       parent            

@@ -5,56 +5,123 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Layouts
 import qs.singletons
+import qs.themes
 Row {
-    id: root
-    spacing: Globals.margins
+    id:                             root
+    spacing:                        Themes.gap[Themes.theme_number]
     Repeater {//repeats {model}-times the following action
-        model: 9
+        model:                      9
         ObjectWidget {
-            id:w
-            border.color:               "red"
-            border.width: 0
-            implicitWidth: contentRow.width + 10
-            visible: isActive ? true : (ws ? true : false)
-            color: isActive ? Colors.workspaceactive : Colors.bar
+            id:                     w
+            border.width:           Themes.borderwidth[Themes.theme_number]
+            //implicitWidth:          contentRow.width + 10
+            width:                  hovered ? implicitWidth + 10 :implicitWidth
+            visible:                isActive ? true : (ws ? true : false )
+            color:                  Themes.widgetcolor[Themes.theme_number]
+            border.color:           Themes.bordercolor[Themes.theme_number]
+            radius:                 Themes.radius[Themes.theme_number]
             required property int index
-            property var ws:            Hyprland.workspaces.values.find(ws => ws.id === index + 1)
-            property bool isActive:     Hyprland.focusedWorkspace.id === (index + 1)
-            property var windows:       Hyprland.toplevels.values.filter(w => w.workspace?.id === index + 1)
+            property var ws:        Hyprland.workspaces.values.find(ws => ws.id === index + 1)
+            property bool isActive: Hyprland.focusedWorkspace.id === (index + 1)
+
+            //property var windows:       Hyprland.toplevels.values.filter(w => w.workspace?.id === index + 1)
+
+            function windows() {
+                Hyprland.refreshWorkspaces()
+                return Hyprland.toplevels.values.filter(w => w.workspace?.id === index + 1)
+            }
+            
+            Behavior on width {
+                NumberAnimation {duration:100}
+            }
+
+            function click() {
+                if (ws)
+                    ws.activate()
+            }
 
             Row {
                 anchors.centerIn: parent
                 id: contentRow
-                spacing: 1
+                spacing: 0
+                Text {
+                    text:   index+1
+                    color:  w.isActive ? Themes.textcolor[Themes.theme_number] : Themes.workspaceinactivecolor[Themes.theme_number]
+                    font.family:   Themes.font[Themes.theme_number]
+                    font.pointSize: 8
+                }
                 Repeater {
-                    model: windows
+                    model: w.windows()
                     delegate: Text {
                         required property var modelData
-                        property string appClass: modelData.lastIpcObject.class
+                        property string appClass: modelData.title
+                        
+                        Component.onCompleted: {
+                            console.log("title:", modelData.title)
+                        }
+
 
                         function iconFor(title) {
                             const t = title.toLowerCase();
+                            if (t.includes("~"))
+                                return Themes.kitty_icon[Themes.theme_number];
+                            if (t.includes("dolphin"))
+                                return Themes.filemanager_icon[Themes.theme_number];
                             if (t.includes("firefox"))
-                                return "󰈹";
-                            if (t.includes("nvim") || t.includes("vim"))
-                                return "";
-                            if (t.includes("vesktop") || t.includes("discord"))
-                                return "";
+                                return Themes.firefox_icon[Themes.theme_number];
+                            if (t.includes("nvim"))
+                                return Themes.vim_icon[Themes.theme_number];
+                            if (t.includes("discord"))
+                                return Themes.discord_icon[Themes.theme_number];
                             if (t.includes("spotify"))
-                                return "";
-                            if (t.includes("vs"))
-                                return "";
-                            return "󰣆";
+                                return Themes.spotify_icon[Themes.theme_number];
+                            if (t.includes("steam"))
+                                return Themes.steam_icon[Themes.theme_number];
+
+                            if (t.includes(".pdf"))
+                                if (t.includes("zathura"))
+                                    return "󰬇";
+                                else
+                                    return "";
+
+                            if (t.includes("qs")) 
+                                return ("󰫾");
+                            return "";
                         }
 
-                        Component.onCompleted: {
-                            console.log(Hyprland.dispatch.toString())
-                            console.log(typeof Hyprland.dispatch)
-                            console.log(Object.keys(Hyprland));
-                            console.log(Hyprland.dsp);
+                        
+                        function colorFor(title) {
+                            const t = title.toLowerCase();
+                            if (t.includes("~"))
+                                return "lightblue";
+                            if (t.includes("dolphin"))
+                                return "white";
+                            if (t.includes("firefox"))
+                                return "orange";
+                            if (t.includes("nvim"))
+                                return "blue";
+                            if (t.includes("discord"))
+                                return "white";
+                            if (t.includes("spotify"))
+                                return "green";
+                            if (t.includes("steam"))
+                                return "blue";
+                            if (t.includes(".pdf"))
+                                if (t.includes("zathura"))
+                                    return "white";
+                                else
+                                    return "red";
+
+                            if (t.includes("qs")) 
+                                return ("lightgreen")
+
+                            return "white";
                         }
-                        text: iconFor(modelData.title)
-                        color: Colors.text
+
+
+                        text: iconFor(appClass)
+                        color: w.isActive ? colorFor(appClass) : Themes.workspaceinactivecolor[Themes.theme_number]
+                        font.pointSize: 10
                     }
                 }
             }

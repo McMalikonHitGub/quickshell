@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import qs.singletons
 import qs.functions
+import qs.themes
 
 Rectangle {
     id: rect
@@ -17,8 +18,8 @@ Rectangle {
         anchors.centerIn: parent
     }
 
-    implicitWidth: contentItem.childrenRect.width
-    implicitHeight: Globals.barheight
+    implicitWidth: contentItem.childrenRect.width + 10 < implicitHeight ? implicitHeight : contentItem.childrenRect.width + 10
+    implicitHeight: Themes.barheight[Themes.theme_number]-10
 
     MouseArea {
         id:                 mouse

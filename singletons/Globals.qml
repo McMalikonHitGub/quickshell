@@ -13,6 +13,11 @@ Singleton {
     property int wlogoutwidth:  30
     property int networkwidth:  80
 
+    property int bindsmenuwidth: 20
+    property bool bindsmenuvis: false
+    property bool networkscan: false
+    property bool networkvis: false
+
     property bool sidebar_visible: true
     property int workspaceswidgetwidth: 300
 }

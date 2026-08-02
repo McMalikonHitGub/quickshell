@@ -17,3 +17,4 @@ Singleton {
     property var batterymid:        Qt.rgba(255,255,0,0.15)
     property var batterylow:        Qt.rgba(255,0,0,0.15)
 }
+
