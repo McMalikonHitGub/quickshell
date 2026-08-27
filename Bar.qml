@@ -48,7 +48,7 @@ Scope {
             pos: rightwid.network_pos
         }
         LeftWidgets{}
-        Workspaces{anchors.centerIn: parent}
+        SuperWorkspaces{anchors.centerIn: parent}
         RightWidgets{
             id:rightwid 
             x:position

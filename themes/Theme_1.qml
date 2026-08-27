@@ -1,4 +1,5 @@
 import Quickshell
+import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
@@ -8,6 +9,7 @@ import qs.widgets
 import qs.singletons
 
 PanelWindow {
+    WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
@@ -22,32 +24,46 @@ PanelWindow {
         }
     }
     id:bar
-    color: Colors.bar
+    color: Themes.barcolor[Themes.theme_number]
+
     margins{
         right: 0
         left: 0
         top: 0
         bottom: 0
     }
+
     anchors {
-        top: Themes.theme_number === 1 ? false : true
+        top: true
         right: true
         left: true
-        bottom: Themes.theme_number === 1 ? true : false
+        bottom: false
     }
+
     implicitHeight: Themes.barheight[Themes.theme_number]
-    WlogoutMenu{
-        anchor.window:  bar
-        pos: rightwid.wlogout_pos
-    }
+
     NetworkMenu{
         anchor.window: bar
         pos: rightwid.network_pos
     }
+
     LeftWidgets{
+        id: leftwid
         y: rightwid.custom_y
     }
-    Workspaces{anchors.centerIn: parent}
+
+    SuperWorkspaces{anchors.centerIn: parent}
+
+    BindMenu{
+        anchor.window: bar
+        pos: leftwid.bindmenu_pos
+    }
+
+    ThemeSwitcherMenu{
+        anchor.window: bar
+        pos: 20
+    }
+
     RightWidgets{
         id:rightwid 
         x: custom_x

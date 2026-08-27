@@ -17,8 +17,8 @@ Rectangle {
     function click() {}
 
     implicitWidth:              image.visible ? image.width : (text.implicitWidth > Themes.barheight[Themes.theme_number] ? text.implicitWidth+ 10 : implicitHeight)
-    implicitHeight:             image.visible ? image.height : Themes.barheight[Themes.theme_number]-10
-    Behavior on implicitWidth {
+    implicitHeight:             image.visible ? image.height : Themes.barheight[Themes.theme_number]
+    Behavior on width {
         NumberAnimation {duration:100}
     }
     MouseArea {
@@ -34,7 +34,7 @@ Rectangle {
 
     Item {
         id:                     content
-        anchors.centerIn:       parent
+        anchors.fill:       parent
 
         implicitWidth:          image.visible ? image.implicitWidth     : text.implicitWidth
         implicitHeight:         image.visible ? image.implicitHeight    : text.implicitHeight

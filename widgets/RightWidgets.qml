@@ -11,7 +11,7 @@ Row {
     Clock{id:clo}
     Wlogout{id:wlo}
     property real custom_x:     parent.width - bat.width - net.width - sou.width - clo.width - wlo.width - 5*Themes.gap[Themes.theme_number]-5
-    property int custom_y:      (parent.implicitHeight - implicitHeight)/2+10
+    property int custom_y:      (Themes.barheight - height)/2
     property int wlogout_pos:   custom_x+wlo.x
     property int network_pos:   custom_x+net.x
 }

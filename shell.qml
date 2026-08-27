@@ -8,21 +8,30 @@ import qs.themes
 import qs.minecraft
 
 Scope {
-    Loader {
-        anchors.fill: parent
+    Variants {
+        model: Quickshell.screens
+        Loader {
+            anchors.fill: parent
+            required property var modelData
 
-        sourceComponent:
-            Themes.theme_number === 0 ? theme_1 :
-            Themes.theme_number === 1 ? theme_2 :
-            Themes.theme_number === 2 ? theme_3 :
-            Themes.theme_number === 3 ? theme_4 :
-            Themes.theme_number === 4 ? theme_5 :
-            Themes.theme_number === 5 ? theme_6 :
-            Themes.theme_number === 6 ? theme_7 :
-            Themes.theme_number === 7 ? theme_8 :
-            Themes.theme_number === 8 ? theme_9 :
-            null
+            sourceComponent:
+                Themes.theme_number === 0 ? theme_1 :
+                Themes.theme_number === 1 ? theme_2 :
+                Themes.theme_number === 2 ? theme_3 :
+                Themes.theme_number === 3 ? theme_4 :
+                Themes.theme_number === 4 ? theme_5 :
+                Themes.theme_number === 5 ? theme_6 :
+                Themes.theme_number === 6 ? theme_7 :
+                Themes.theme_number === 7 ? theme_8 :
+                Themes.theme_number === 8 ? theme_9 :
+                null
+            onLoaded: {
+                item.screen = modelData
+            }
+        }
     }
+    WorkspaceIndicator {}
+
 
     Component {
         id: theme_1

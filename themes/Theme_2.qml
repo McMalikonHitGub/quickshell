@@ -37,11 +37,17 @@ PanelWindow{
         right:  true
         bottom: false
     }
-    LeftWidgets{
-        y: rightwid.custom_y
-
+    NetworkMenu {
+        anchor.window: bar
+        pos: rightwid.network_pos
     }
-    Workspaces{anchors.centerIn: parent}
+
+    LeftWidgets{
+        id: leftwid
+        y: leftwid.custom_y
+    }
+
+    SuperWorkspaces{anchors.centerIn: parent}
     RightWidgets{
         id:rightwid 
         x: custom_x

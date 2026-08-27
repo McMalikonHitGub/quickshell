@@ -63,6 +63,9 @@ Rectangle {
     Row {
         id: row
         property bool extended
+
+        spacing: Themes.gap[Themes.theme_number]
+
         TextWidget {
             visible: true
             inhalt: Themes.bindmenu_icon[Themes.theme_number]

@@ -19,7 +19,7 @@ Rectangle {
     }
 
     implicitWidth: contentItem.childrenRect.width + 10 < implicitHeight ? implicitHeight : contentItem.childrenRect.width + 10
-    implicitHeight: Themes.barheight[Themes.theme_number]-10
+    implicitHeight: Themes.barheight[Themes.theme_number]
 
     MouseArea {
         id:                 mouse
@@ -31,8 +31,8 @@ Rectangle {
         onExited: { exit() }
         onClicked: { click() }
     }
-    border.color: Colors.border
-    border.width: mouse.containsMouse ? 1:1
-    color: mouse.containsMouse ? Colors.blur : Colors.bar
-    radius: Globals.radius
+    border.color: Themes.bordercolor[Themes.theme_number]
+    border.width: Themes.borderwidth[Themes.theme_number]
+    color: mouse.containsMouse ? Themes.hovercolor[Themes.theme_number] : Themes.widgetcolor[Themes.theme_number]
+    radius: Themes.radius[Themes.theme_number]
 }

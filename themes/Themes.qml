@@ -6,23 +6,29 @@ pragma Singleton
 Singleton {
     property real theme_number:                 0
 
-    property list<string> themes_icons: ["󰬺","2","file:///home/malik/.config/quickshell/minecraft/icons/Grass_Block.png","󰬽","󰬾","󰬿","󰭀","󰭁","󰭂"]
+    property list<string> themes_icons: ["1","2","3","4","5","6","7","8","9"]
 
     property list<string> font: [
         "Monocraft",
+        "cubic",
+        "HeavyDataNerdFont-Regular",
+        "HeavyDataNerdFont-Regular",
+        "HeavyDataNerdFont-Regular",
+        "HeavyDataNerdFont-Regular",
+        "HeavyDataNerdFont-Regular",
         "HeavyDataNerdFont-Regular"
         ]
 
     property list<real> gap: [
-        2,-1,0,5,5,5,5,5,5
+        5,-1,0,5,5,5,5,5,5
     ]
 
     property list<real> borderwidth: [
-        0,1,1,0,0,0,0,0,0
+        1,1,1,0,0,0,0,0,0
     ]
 
     property list<real> radius: [
-        0,0,15,5,5,5,5,5,5
+        5,0,15,5,5,5,5,5,5
     ]
 
     property list<real> barheight: [
@@ -41,13 +47,13 @@ Singleton {
     ]
 
     property list<var> widgetcolor: [
-        Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.1, 0.1, 0.1, 1.0), Qt.rgba(0.0, 0.0, 0.0, 0.0),
+        Qt.rgba(0.0, 0.0, 0.0, 1.0), Qt.rgba(0.1, 0.1, 0.1, 1.0), Qt.rgba(0.0, 0.0, 0.0, 0.0),
         Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0),
         Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0)
     ]
 
     property list<var> bordercolor: [
-        Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 1.0, 1.0, 1.0), Qt.rgba(0.0, 0.0, 0.0, 0.0),
+        Qt.rgba(0.8, 0.8, 0.8, 1.0), Qt.rgba(0.0, 1.0, 1.0, 1.0), Qt.rgba(0.0, 0.0, 0.0, 0.0),
         Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0),
         Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0), Qt.rgba(0.0, 0.0, 0.0, 0.0)
     ]
@@ -154,7 +160,7 @@ Singleton {
     ]
 
     property list<string> bindmenu_icon: [
-        "󰀻","󰀻","file:///home/malik/.config/quickshell/minecraft/icons/Arrow_Right.png","󰀻","󰀻","󰀻","󰀻","󰀻","󰀻"
+        "󰀻","󰛡","file:///home/malik/.config/quickshell/minecraft/icons/Arrow_Right.png","󰀻","󰀻","󰀻","󰀻","󰀻","󰀻"
     ]
 
     //hard widths
@@ -167,6 +173,10 @@ Singleton {
     property bool wlogoutwidget_is_x:           false
     property bool wlogoutmenu_vis:              false
     property bool networkwidget_is_x:           false
+
+    property bool thememenu_vis:                false
     property bool networkmenu_vis:              false
+    property bool programmenu_vis:              false
+
     property bool networkscan:                  false
 }

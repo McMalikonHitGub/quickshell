@@ -12,7 +12,7 @@ PopupWindow {
     required property int pos
     property var networks: []
     anchor.rect.x: pos - 5
-    anchor.rect.y: Globals.barheight//Themes.barheight[Themes.theme_number] + 10
+    anchor.rect.y: Themes.barheight[Themes.theme_number] + 10
     implicitHeight: Themes.networkwidget_is_x ? col.height+1 : 1
     implicitWidth: col.implicitWidth+5
     visible: Themes.networkmenu_vis
