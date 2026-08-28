@@ -31,6 +31,7 @@ Scope {
         }
     }
     WorkspaceIndicator {}
+    Menu{}
 
 
     Component {
