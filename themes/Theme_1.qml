@@ -15,11 +15,11 @@ PanelWindow {
         gradient: Gradient {
             GradientStop {
                 position: 0.0
-                color: Qt.rgba(0.15, 0.15, 0.15, 1) // oben
+                color: Qt.rgba(0.0, 0.0, 0.0, 1) // oben
             }
             GradientStop {
                 position: 1.0
-                color: Qt.rgba(0.15, 0.15, 0.15, 0.0) // unten
+                color: Qt.rgba(0.0, 0.0, 0.0, 0.0) // unten
             }
         }
     }
@@ -54,10 +54,6 @@ PanelWindow {
 
     SuperWorkspaces{anchors.centerIn: parent}
 
-    BindMenu{
-        anchor.window: bar
-        pos: leftwid.bindmenu_pos
-    }
 
     ThemeSwitcherMenu{
         anchor.window: bar

@@ -3,126 +3,131 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 import QtQuick
+import QtQuick.Shapes 1.11
 import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 import qs.widgets
+import qs.widgets.menuwidgets
 import qs.themes
 import qs.minecraft
+
 PanelWindow {
     id: floatingWindow
 
     anchors {
         top: true
         left: true
+        right: true
+        bottom: true
     }
     margins {
-        left:1280/2 -floatingWindow.width/2
-        top: 5
+        top: 300
+        left: 800
+        right: 800
+        bottom: 300
     }
-
 
     implicitWidth: 300
     implicitHeight: 150
-    visible: shown
+    visible: false
     color: "transparent"
     
     focusable: true
 
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-    property bool shown: true
-    
-    property var placeholderModel: menus
+    property var wpfolders : [] 
 
-    property list<var> menus: [
-        {
-            name: "Themes"
-        },
-        {
-            name: "Programs",
-            buttons: [
-                {
-                    name:       "Terminal",
-                    command:    "kitty"
-                },
-                {
-                    name:       "File Manager",
-                    command:    "dolphin"
-                },
-                {
-                    name:       "Browser",
-                    command:    "firefox"
-                },
-                {
-                    name:       "Obsidian",
-                    command:    "obsidian"
-                },
-                {
-                    name:       "Steam",
-                    command:    "steam"
-                },
-                {
-                    name:       "Spotify",
-                    command:    "spotify-launcher"
-                },
-                {
-                    name:       "Discord",
-                    command:    "discord"
-                },
-                {
-                    name:       "Inkscape",
-                    command:    "inkscape"
-                }
-            ]
-
-        },
-        {
-            name: "Network"
-        }
-    ]
-    
 
     Column {
         id: rootmenu
         anchors.centerIn: parent
-        Repeater {
-            id: rep
-            model: placeholderModel//floatingWindow.menus
             
-            TextWidget {
-                required property var modelData
-                inhalt: modelData.name
-                inhaltcolor: Themes.textcolor[Themes.theme_number]
+        TextWidget {
+            id: programsbutton
+            inhalt: "Programs"
+            inhaltcolor: Themes.textcolor[Themes.theme_number]
 
-                //skaling
-                width: floatingWindow.width
-                height: floatingWindow.height/rep.model.length
-                
-                Process {
-                    id: proc 
-                }
-                function click() {
-                        placeholderModel = modelData.buttons
+            width: floatingWindow.width
+            height: floatingWindow.height/3
+
+            function click() {
+                rootmenu.visible = false
+            }
+
+
+        }
+        
+        TextWidget {
+            id: themesbutton
+            required property var modelData
+            inhalt: "Themes"
+            inhaltcolor: Themes.textcolor[Themes.theme_number]
+
+            width: floatingWindow.width
+            height: floatingWindow.height/3
+
+
+
+            function click() {
+                floatingWindow.margins.top = 450
+                floatingWindow.margins.bottom = 450
+                floatingWindow.margins.left = 5
+                floatingWindow.margins.right = 5
+                rootmenu.visible = false
+
+                themerow.visible = true
+                getwpfolders.running = true
+            }
+
+            Process {
+                id: getwpfolders
+                command: ["ls","/home/malik/pictures/wallpapers/"]
+
+                stdout: StdioCollector {
+                    onStreamFinished: {
+                        const raw = this.text.trim()
+                        const w = raw.split("\n")
+                        floatingWindow.wpfolders = w
+                    }
                 }
             }
         }
-    }
 
+        TextWidget {
+            id: networkbutton
+            required property var modelData
+            inhalt: "Network"
+            inhaltcolor: Themes.textcolor[Themes.theme_number]
+
+            width: floatingWindow.width
+            height: floatingWindow.height/3
+        }
+    }
+    
+    Theme {id: themerow}
     IpcHandler {
         target: "floatingWindow"
 
-        function show(): void {
-            floatingWindow.shown = true
-        }
-
-        function hide(): void {
-            floatingWindow.shown = false
-        }
-
         function toggle(): void {
-            floatingWindow.shown = !floatingWindow.shown
+            floatingWindow.visible = !floatingWindow.visible
+            floatingWindow.margins.top = 300
+            floatingWindow.margins.bottom = 300
+            floatingWindow.margins.left = 800
+            floatingWindow.margins.right = 800
+
+            rootmenu.visible = true
+            themerow.visible = false
         }
         function back(): void {
-            placeholderModel = floatingWindow.menus
+            //base stats
+            floatingWindow.margins.top = 300
+            floatingWindow.margins.bottom = 300
+            floatingWindow.margins.left = 800
+            floatingWindow.margins.right = 800
+
+            rootmenu.visible = true
+            themerow.visible = false
         }
     }
 }
