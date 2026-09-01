@@ -23,15 +23,15 @@ Rectangle {
     property var buttons: [
         {
             name: Themes.hyprlock_icon[Themes.theme_number],
-            command: "hyprlock"
+            command: ["hyprlock"]
         },
         {
             name: Themes.shutdown_icon[Themes.theme_number],
-            command: "shutdown now"
+            command: ["shutdown","now"]
         },
         {
             name: Themes.reboot_icon[Themes.theme_number],
-            command: "reboot"
+            command: ["reboot"]
         }
     ]
 
@@ -62,7 +62,7 @@ Rectangle {
 
                 Process {
                     id: c 
-                    command:[modelData.command]
+                    command:modelData.command
                 }
             }
         }

@@ -28,7 +28,7 @@ PanelWindow {
     }
 
     implicitWidth: 300
-    implicitHeight: 150
+    implicitHeight: 300
     visible: false
     color: "transparent"
     
@@ -70,8 +70,8 @@ PanelWindow {
 
 
             function click() {
-                floatingWindow.margins.top = 450
-                floatingWindow.margins.bottom = 450
+                floatingWindow.margins.top = 350
+                floatingWindow.margins.bottom = 350
                 floatingWindow.margins.left = 5
                 floatingWindow.margins.right = 5
                 rootmenu.visible = false
@@ -105,7 +105,10 @@ PanelWindow {
         }
     }
     
-    Theme {id: themerow}
+    Theme {
+        id: themerow
+        rootmodel: floatingWindow.wpfolders
+    }
     IpcHandler {
         target: "floatingWindow"
 
