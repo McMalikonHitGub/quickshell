@@ -11,10 +11,12 @@ import qs.widgets
 import qs.themes
 RowLayout {
     id: root
-    width: parent.width
+    width: parent.width 
+    anchors.horizontalCenter: parent.horizontalCenter
     anchors.horizontalCenterOffset: offset
+
     required property var wps
-    property real offset: 0
+    property real offset: -wpwidth/2
     height: 300
     property real wpwidth: 300
     spacing: -30
@@ -32,22 +34,17 @@ RowLayout {
         property: "offset"
         duration: 300
     }
-    function leftClicked()          { //moveRowInstant(-300);     
-    delayedLeft.restart(); }
-    function rightClicked()         { //moveRowInstant(300);      
-    delayedRight.restart();}
-    function moveRowInstant(step)   { moveAnimation.to = step;  moveAnimation.start(); }
     Timer                           {id: delayedLeft;     interval: 0; running: false; repeat: false; onTriggered: {updateModel(); decre();}}
     Timer                           {id: delayedRight;    interval: 0; running: false; repeat: false; onTriggered: {updateModel(); incre();}}
     function incre()                { if (counter < root.wps.length -1)     { counter++ }                               else { counter = 0 } }
     function decre()                { if (counter > 0)                      { counter-- }                               else { counter = root.wps.length - 1 } }
     function start(k)               { if (counter < k)                      { return root.wps.length + counter - k }    else { return counter - k } }
     function end(k)                 { if (counter >= root.wps.length -k)    { return counter + k - root.wps.length }    else { return counter + k } }
-    function updateModel()          { m = [start(3),start(2),start(1),counter,end(1),end(2),end(3)] }
+    function updateModel()          { m = [start(4),start(3),start(2),start(1),counter,end(1),end(2),end(3),end(4)] }
 
     focus: true
 
-    property var m: [start(3),start(2),start(1),0,end(1),end(2),end(3)]
+    property var m: [start(4),start(3),start(2),start(1),0,end(1),end(2),end(3),end(4)]
     // test list
     property list<string> numbers: ["Null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn"]
 
@@ -59,14 +56,11 @@ RowLayout {
             required property real modelData
             required property real index
             property string path: "file:///home/malik/pictures/wallpapers/" + root.wps[modelData]
-            property real slant: 30
+            property real slant: modelData == counter ? -root.spacing + 10 : - root.spacing
             focus: true
 
-            width: modelData == counter ? root.wpwidth + 50 : root.wpwidth
-            height: modelData == counter ? 250 + 50 : 250
-
-            Behavior on width {NumberAnimation {duration: 200}}
-            Behavior on height {NumberAnimation {duration: 200}}
+            width: modelData == counter ? root.wpwidth + 50 : root.wpwidth-50
+            height: modelData == counter ? root.wpwidth + 50 : root.wpwidth -50
 
             Item {
                 id: cover
@@ -90,7 +84,7 @@ RowLayout {
                     Text {
                         x:10
                         color:"white"
-                        text: root.wps[modelData]
+                        text: root.wps[modelData].split(".")[0]
                         font.pixelSize:20
                     }
                 }
