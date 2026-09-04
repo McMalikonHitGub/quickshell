@@ -23,12 +23,14 @@ Row {
             duration: 100
         }
     }
+    
     Repeater {
         id: rep
-        model: rootmodel
+        model: rootmodel.length
         Item {
             id:container
             required property var modelData
+            property var folder: modelData
             required property real index
             property string path: "file:///home/malik/pictures/wallpapers/" + modelData + "/"
             property string coverpath: path + "cover.png"
@@ -120,8 +122,8 @@ Row {
                     onStreamFinished: {
                         const raw = this.text.trim()
                         const w = raw.split("\n")
-                        rep.model = w
-                        console.log(rootmodel)
+                        wprep.model = w
+                        console.log(w)
                     }
                 }
             }

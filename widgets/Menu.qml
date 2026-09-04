@@ -36,7 +36,7 @@ PanelWindow {
 
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
 
-    property var wpfolders : [] 
+    property var wps : [] 
 
 
     Column {
@@ -76,19 +76,19 @@ PanelWindow {
                 floatingWindow.margins.right = 5
                 rootmenu.visible = false
 
-                themerow.visible = true
-                getwpfolders.running = true
+                wprow.visible = true
+                getwps.running = true
             }
 
             Process {
-                id: getwpfolders
+                id: getwps
                 command: ["ls","/home/malik/pictures/wallpapers/"]
 
                 stdout: StdioCollector {
                     onStreamFinished: {
                         const raw = this.text.trim()
                         const w = raw.split("\n")
-                        floatingWindow.wpfolders = w
+                        floatingWindow.wps = w
                     }
                 }
             }
@@ -104,10 +104,9 @@ PanelWindow {
             height: floatingWindow.height/3
         }
     }
-    
-    Theme {
-        id: themerow
-        rootmodel: floatingWindow.wpfolders
+    Cover {
+        id: wprow
+        wps: floatingWindow.wps
     }
     IpcHandler {
         target: "floatingWindow"
@@ -120,7 +119,7 @@ PanelWindow {
             floatingWindow.margins.right = 800
 
             rootmenu.visible = true
-            themerow.visible = false
+            wprow.visible = false
         }
         function back(): void {
             //base stats
@@ -130,7 +129,7 @@ PanelWindow {
             floatingWindow.margins.right = 800
 
             rootmenu.visible = true
-            themerow.visible = false
+            wprow.visible = false
         }
     }
 }
